@@ -6,7 +6,7 @@
     const sum = usdItems.reduce((acc, item) => acc + item.price, 0);
     return sum / usdItems.length;
   }
-  console.log("usdAverage", usdAverage(items));
+  console.log("usdAverage", usdAverage(items)); // the arguments in my console.log are saying what the arguments in my function are refering to
 
   // Problem 2
 
@@ -35,6 +35,7 @@
   console.log("filterByMaterials", filterByMaterials(items, "wood"));
 
   // Problem 5
+  // couldn't figure out how to get the title AND the list of materials to print
 
   function filterByQuantity(arr, matMin) {
     const moreThanEight = arr.filter((item) => item.materials.length >= matMin);
