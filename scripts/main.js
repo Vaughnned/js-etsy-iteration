@@ -3,10 +3,13 @@
   // Problem 1
   function usdAverage(arr) {
     const usdItems = arr.filter((item) => item.currency_code === "USD");
-    const sum = usdItems.reduce((acc, item) => acc + item.price, 0);
+    const sum = usdItems.reduce((acc, item) => acc + item.price, 0); // Alternate solution: usdItems.map(function (item) { return item.price; }
     return sum / usdItems.length;
   }
-  console.log("usdAverage", usdAverage(items)); // the arguments in my console.log are saying what the arguments in my function are refering to
+  console.log(
+    "usdAverage",
+    "The average price is " + usdAverage(items).toFixed(2)
+  ); // the arguments in my console.log are saying what the arguments in my function are refering to
 
   // Problem 2
 
@@ -19,11 +22,13 @@
   // Problem 3
 
   function findByCurrency(arr, code) {
-    return arr.find((item) => item.currency_code === code); // Using find() to find one specific currency code
+    return arr.filter((item) => item.currency_code === code); // Using find() to find one specific currency code
   }
   let gbpItem = findByCurrency(items, "GBP");
 
-  console.log("findByCurrency", gbpItem.title, "£" + gbpItem.price);
+  gbpItem.forEach(function (item) {
+    console.log("findByCurrency", ` ${item.title} costs £${item.price}`);
+  });
 
   // Problem 4
 
@@ -32,20 +37,31 @@
     return woodFilter.map((item) => item.title); // Now map through the item to return just the title
   }
 
-  console.log("filterByMaterials", filterByMaterials(items, "wood"));
-
+  filterByMaterials(items, "wood").forEach(function (item) {
+    console.log(item, "\n");
+  });
   // Problem 5
   // couldn't figure out how to get the title AND the list of materials to print
 
   function filterByQuantity(arr, matMin) {
-    const moreThanEight = arr.filter((item) => item.materials.length >= matMin);
-    return moreThanEight.map((item) => item.materials);
+    return arr
+      .filter(function (item) {
+        return item.materials.length >= matMin;
+      })
+      .map(function (item) {
+        return {
+          title: item.title,
+          materials: item.materials,
+        };
+      });
   }
-
-  console.log(
-    "filterByQuantity",
-    filterByQuantity(items, 8, items.title, items.materials)
-  );
+  console.log("filterByQuantity");
+  filterByQuantity(items, 8).forEach(function (item) {
+    console.log(item.title);
+    item.materials.forEach(function (material) {
+      console.log(material);
+    });
+  });
 
   // Problem 6
 
